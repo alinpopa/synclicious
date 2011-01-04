@@ -7,7 +7,8 @@ class SyncliciousProject(info: ProjectInfo) extends DefaultProject(info){
 
   override def libraryDependencies = Set(
       "org.apache.httpcomponents" % "httpcore" % "4.1" % "compile",
-      "org.apache.httpcomponents" % "httpclient" % "4.0.3" % "compile"
+      "org.apache.httpcomponents" % "httpclient" % "4.0.3" % "compile",
+      "com.google.code.gson" % "gson" % "1.6" % "compile"
   )
 }
 
