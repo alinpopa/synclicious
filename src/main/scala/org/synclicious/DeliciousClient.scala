@@ -41,6 +41,8 @@ object DeliciousClient {
   import java.util.{Set => JSet}
   import java.util.Map.{Entry => JMapEntry}
 
+  private type MapTokenType = TypeToken[Map[String,Int]]
+
   private class MapJsonDeserializer extends JsonDeserializer[Map[String,Int]] {
     override def deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): Map[String,Int] = {
       val jsonObject = json.getAsJsonObject.entrySet
@@ -55,7 +57,7 @@ object DeliciousClient {
   def main(args: Array[String]): Unit = {
     val deliciousClient = new DeliciousClient("123")
     val gson = new GsonBuilder().registerTypeAdapter(classOf[Map[String,Int]], new MapJsonDeserializer).create
-    val mapType = new TypeToken[Map[String,Int]]{}.getType
+    val mapType = new MapTokenType(){}.getType
     println(gson.fromJson(deliciousClient.getData, mapType).asInstanceOf[Map[String,Int]].size)
   }
 }
